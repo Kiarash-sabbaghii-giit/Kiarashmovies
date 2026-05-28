@@ -3,19 +3,16 @@
 
 # 🎬 KiarashMovies
 
-*A personal Netflix, born in the darkness of war and internet shutdowns.
+**A personal Netflix, born in the darkness of war and internet shutdowns.**
 
-[!Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)
-[!Django](https://img.shields.io/badge/Django-4.2-green?style=for-the-badge&logo=django)
-[!MySQL](https://img.shields.io/badge/MySQL-8.0-orange?style=for-the-badge&logo=mysql)
-[!BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-4-yellow?style=for-the-badge&logo=python)
-[!Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple?style=for-the-badge&logo=bootstrap)
-[!License](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)
+🐍 Python 3.10+ &nbsp;|&nbsp; 🟢 Django 4.2 &nbsp;|&nbsp; 🐬 MySQL 8.0 &nbsp;|&nbsp; 🍜 BeautifulSoup 4 &nbsp;|&nbsp; 🟣 Bootstrap 5.3 &nbsp;|&nbsp; ⚖️ MIT License
 
+<p align="center">
   <img src="demo.gif" alt="KiarashMovies Demo" width="800"/>
 </p>
 
 </div>
+
 
 ---
 
