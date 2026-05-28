@@ -1,0 +1,400 @@
+
+:root {
+    --bg: #0a0a0a;
+    --card-bg: #141414;
+    --accent: #e50914;
+    --gold: #f5c518;
+    --text: #fff;
+    --muted: #aaa;
+    --border: #2a2a2a;
+}
+
+ { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    line-height: 1.6;
+}
+.container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+.header {
+    background: #000;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.logo {
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/ جستجو /
+.search-form {
+    position: relative;
+    flex-grow: 1;
+    max-width: 340px;
+}
+.search-box {
+    display: flex;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 30px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+.search-box:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(229,9,20,0.2);
+}
+.search-box input {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    color: white;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+}
+.search-box input::placeholder { color: #888; }
+.search-box button {
+    background: var(--accent);
+    border: none;
+    color: white;
+    padding: 0 1.1rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.3s;
+}
+.search-box button:hover { background: #ff0a16; }
+
+/ جعبه پیشنهادات /
+.suggestions-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1a1a1a;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    max-height: 320px;
+    overflow-y: auto;
+    margin-top: 6px;
+    list-style: none;
+    padding: 0.5rem 0;
+    display: none;
+    z-index: 1200;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+}
+.suggestions-dropdown li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    color: #ddd;
+    text-decoration: none;
+    border-bottom: 1px solid #2a2a2a;
+    transition: background 0.2s;
+}
+.suggestions-dropdown li:last-child a { border-bottom: none; }
+.suggestions-dropdown li a:hover { background: #2a2a2a; color: white; }
+.suggestions-dropdown .suggestion-title { font-weight: 500; }
+.suggestions-dropdown .suggestion-year { color: var(--muted); font-size: 0.85rem; margin-right: 0.5rem; }
+.suggestions-dropdown .suggestion-rate { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; }
+
+/ منوی لینک‌ها /
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    white-space: nowrap;
+}
+.main-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}
+.main-nav a:hover { color: var(--gold); }
+.main-nav span { color: var(--muted); margin-right: 0.4rem; }
+
+/ ------------- کارت فیلم (home) ------------- */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
+}
+.movie-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: block;
+}
+.movie-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.7), 0 0 12px rgba(245,197,24,0.15);
+    border-color: var(--gold);
+}
+.movie-poster-placeholder {
+    height: 220px;
+    background: linear-gradient(135deg, #1e1e1e, #111);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #444;
+    transition: color 0.3s;
+}
+.movie-card:hover .movie-poster-placeholder { color: var(--gold); }
+.movie-info {
+    padding: 0.8rem;
+}
+.movie-info h5 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+.movie-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.badge-year {
+    background: #333;
+    color: #ccc;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+}
+.badge-imdb {
+    background: var(--gold);
+    color: #000;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+
+.detail-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+.detail-header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.detail-header .movie-poster-placeholder {
+    width: 200px;
+    height: 280px;
+    border-radius: 16px;
+    font-size: 3.5rem;
+    flex-shrink: 0;
+}
+.detail-info h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+.detail-info .meta { color: var(--muted); margin-bottom: 1rem; }
+
+/ لینک‌های دانلود /
+.download-section {
+    margin-top: 2rem;
+}
+.download-section h4 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+}
+.download-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.download-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1c1c1c;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1.2rem;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+.download-link:hover {
+    background: #2a2a2a;
+    border-color: var(--accent);
+}
+.download-link .quality { font-weight: 600; }
+.download-link .size { color: var(--muted); font-size: 0.9rem; }
+
+/ ------------- فرم‌های ورود/ثبت‌نام ------------- /
+.auth-card {
+    max-width: 440px;
+    margin: 4rem auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+.form-group {
+    margin-bottom: 1.2rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.95rem;
+    transition: border 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+.form-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(229,9,20,0.15);
+}
+.form-group input::placeholder { color: #666; }
+.btn-submit {
+    width: 100%;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.btn-submit:hover { background: #ff0a16; transform: translateY(-1px); }
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--muted);
+}
+.auth-footer a { color: var(--gold); text-decoration: none; font-weight: 500; }
+
+
+
+/* ========== صفحه‌بندی (Pagination) ========== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap !important;
+    list-style: none;
+    padding: 2rem 0 1rem;
+    gap: 4px;
+    margin: 0;
+    direction: itr;
+}
+
+.pagination .page-link {
+    background: #1c1c1c;
+    color: #ccc;
+    border: 1px solid #333;
+    border-radius: 4px;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.pagination .page-link:hover {
+    background: #2a2a2a;
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 0 8px rgba(229,9,20,0.3);
+}
+
+.pagination .page-item.disabled .page-link {
+    background: #141414;
+    color: #555;
+    pointer-events: none;
+}
+
+
+@media (max-width: 480px) {
+    .pagination {
+        flex-wrap: wrap;
+        gap: 3px;
+    }
+    .pagination .page-link {
+        min-width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+        padding: 0 6px;
+    }
+}
+
+/* ------------- متفرقه ------------- */
+.alert {
+    background: #1c1c1c;
+    color: white;
+    border: 1px solid #333;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #1a1a1a; }
+::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #666; }
+
+@media (max-width: 768px) {
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .search-form { max-width: 100%; width: 100%; }
+    .detail-header { flex-direction: column; }
+    .detail-header .movie-poster-placeholder { width: 100%; height: 200px; }
+}

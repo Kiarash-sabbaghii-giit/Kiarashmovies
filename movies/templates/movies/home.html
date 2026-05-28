@@ -1,0 +1,74 @@
+{% extends 'movies/base.html' %}
+{% block title %}خانه | KiarashMovies{% endblock %}
+{% block content %}
+
+<h2 class="mb-4">فیلم‌ها و سریال‌ها</h2>
+
+{% if movies %}
+<div class="movie-grid">
+    {% for movie in movies %}
+    <a class="movie-card" href="{% url 'movie_detail' movie.imdb_code %}">
+        <div class="movie-poster-placeholder">{{ movie.title|slice:":2" }}</div>
+        <div class="movie-info">
+            <h5 title="{{ movie.title }}">{{ movie.title }}</h5>
+            <div class="movie-meta">
+                <span class="badge-year">{{ movie.year }}</span>
+                <span class="badge-imdb">{{ movie.imdb_rate }}</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% if movies.has_other_pages %}
+<nav aria-label="Page navigation">
+    <ul class="pagination" dir="ltr">
+        {% if movies.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ movies.previous_page_number }}&q={{ query }}">Prev</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Prev</span>
+        </li>
+        {% endif %}
+
+        {% for num in movies.paginator.page_range %}
+            {% if num == 1 or num == movies.paginator.num_pages %}
+                {% if num == movies.number %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}&q={{ query }}">{{ num }}</a></li>
+                {% endif %}
+            {% elif num >= movies.number|add:'-2' and num <= movies.number|add:'2' %}
+                {% if num == movies.number %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}&q={{ query }}">{{ num }}</a></li>
+                {% endif %}
+            {% elif num == movies.number|add:'-3' or num == movies.number|add:'3' %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if movies.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ movies.next_page_number }}&q={{ query }}">Next</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<div class="text-center mt-5">
+    <i class="bi bi-search display-1 text-muted"></i>
+    <h3>فیلمی یافت نشد</h3>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'movies/base.html' %}
+{% block title %}ثبت‌نام | KiarashMovies{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h2>عضویت در KiarashMovies</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger py-2">
+                {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <label>نام کاربری</label>
+            <input type="text" name="username" placeholder="نام کاربری" required>
+        </div>
+        <div class="form-group">
+            <label>نام</label>
+            <input type="text" name="first_name" placeholder="نام" required>
+        </div>
+        <div class="form-group">
+            <label>نام خانوادگی</label>
+            <input type="text" name="last_name" placeholder="نام خانوادگی" required>
+        </div>
+        <div class="form-group">
+            <label>ایمیل</label>
+            <input type="email" name="email" placeholder="example@mail.com" required>
+        </div>
+        <div class="form-group">
+            <label>شماره تلفن</label>
+            <input type="text" name="phone" placeholder="09xxxxxxxxx" required>
+        </div>
+        <div class="form-group">
+            <label>رمز عبور</label>
+            <input type="password" name="password1" placeholder="حداقل ۸ کاراکتر" required>
+        </div>
+        <div class="form-group">
+            <label>تکرار رمز عبور</label>
+            <input type="password" name="password2" placeholder="دوباره رمز را وارد کنید" required>
+        </div>
+        <button type="submit" class="btn-submit">ثبت‌نام</button>
+    </form>
+    <div class="auth-footer">
+        قبلاً عضو شده‌اید؟ <a href="{% url 'login' %}">وارد شوید</a>
+    </div>
+</div>
+{% endblock %}

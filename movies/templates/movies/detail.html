@@ -1,0 +1,47 @@
+{% extends 'movies/base.html' %}
+{% block title %}{{ movie.title }} | KiarashMovies{% endblock %}
+{% block content %}
+
+<div class="detail-container">
+    <div class="detail-header">
+        <div class="movie-poster-placeholder">{{ movie.title|slice:":2" }}</div>
+        <div class="detail-info">
+            <h1>{{ movie.title }} <small style="color: var(--muted); font-size: 1.4rem;">({{ movie.year }})</small></h1>
+            <p class="meta">
+                <span class="badge-imdb me-2">{{ movie.imdb_rate }}</span>
+                {{ movie.imdb_votes }} رأی
+            </p>
+            <p class="text-muted">انتخاب کیفیت و دانلود:</p>
+        </div>
+    </div>
+
+    {% if movie.download_links.SoftSub %}
+    <div class="download-section">
+        <h4 class="text-danger mb-3"><i class="bi bi-subtitles"></i> زیرنویس چسبیده</h4>
+        <div class="download-list">
+            {% for link in movie.download_links.SoftSub %}
+            <a href="{{ link.url }}" class="download-link" target="_blank">
+                <span class="quality">{{ link.quality }}</span>
+                <span class="size">{% if link.size %}{{ link.size }}{% endif %}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if movie.download_links.Dubbed %}
+    <div class="download-section">
+        <h4 class="text-success mb-3"><i class="bi bi-mic"></i> دوبله فارسی</h4>
+        <div class="download-list">
+            {% for link in movie.download_links.Dubbed %}
+            <a href="{{ link.url }}" class="download-link" target="_blank">
+                <span class="quality">{{ link.quality }}</span>
+                <span class="size">{% if link.size %}{{ link.size }}{% endif %}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
