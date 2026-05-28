@@ -11,8 +11,7 @@
 [!BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-4-yellow?style=for-the-badge&logo=python)
 [!Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple?style=for-the-badge&logo=bootstrap)
 [!License](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)
-[!License: MIT](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)
-<p align="center">
+
   <img src="demo.gif" alt="KiarashMovies Demo" width="800"/>
 </p>
 
